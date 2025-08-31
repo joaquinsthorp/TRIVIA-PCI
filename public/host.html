@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Panel del Anfitrión</title>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
   <h1>Panel del Anfitrión</h1>
+
+  <h3>Comparte este QR con los jugadores:</h3>
+  <canvas id="qr"></canvas>
+  <p id="link"></p>
+
   <button id="startBtn">Iniciar Juego</button>
   <button id="nextBtn">Siguiente Pregunta</button>
+
   <h2>Jugadores conectados</h2>
   <ul id="players"></ul>
 
   <script>
     const socket = io();
+    const gameURL = window.location.origin + "/join.html";
+
+    QRCode.toCanvas(document.getElementById("qr"), gameURL, function (error) {
+      if (error) console.error(error);
+    });
+    document.getElementById("link").innerText = "Link para jugadores: " + gameURL;
 
     document.getElementById("startBtn").onclick = () => socket.emit("startGame");
     document.getElementById("nextBtn").onclick = () => socket.emit("nextQuestion");
@@ -26,8 +39,13 @@
       });
     });
 
-    socket.on("newQuestion", (q) => alert("Nueva pregunta: " + q.question));
-    socket.on("gameOver", (scores) => alert("Juego terminado. " + JSON.stringify(scores)));
+    socket.on("newQuestion", (q) => {
+      alert("Nueva pregunta: " + q.question);
+    });
+
+    socket.on("gameOver", (scores) => {
+      alert("Juego terminado. " + JSON.stringify(scores));
+    });
   </script>
 </body>
 </html>

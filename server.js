@@ -10,7 +10,7 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || 10000;
 
-// Servir archivos estáticos
+// Servir estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
 // Cargar preguntas
@@ -20,11 +20,10 @@ let players = {};
 let currentQuestion = 0;
 
 io.on("connection", (socket) => {
-  console.log("Nuevo cliente conectado:", socket.id);
+  console.log("Cliente conectado:", socket.id);
 
   socket.on("joinGame", (name) => {
     players[socket.id] = { name, score: 0 };
-    console.log(`${name} se unió al juego.`);
     io.emit("playerList", Object.values(players));
   });
 
@@ -33,11 +32,13 @@ io.on("connection", (socket) => {
     io.emit("newQuestion", questions[currentQuestion]);
   });
 
-  socket.on("answer", (answer) => {
+  socket.on("answer", (answerIndex) => {
     let player = players[socket.id];
     if (!player) return;
-    let correct = questions[currentQuestion].correct === answer;
-    if (correct) player.score += 10;
+    let correctIndex = questions[currentQuestion].answer;
+    if (answerIndex === correctIndex) {
+      player.score += 10;
+    }
     io.emit("playerList", Object.values(players));
   });
 

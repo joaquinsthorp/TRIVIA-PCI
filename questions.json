@@ -1,12 +1,102 @@
 [
   {
-    "question": "¿Cuál es el color del fuego?",
-    "options": ["Rojo", "Azul", "Verde", "Negro"],
-    "correct": "Rojo"
+    "question": "¿Qué es el fuego?",
+    "options": [
+      "Una manifestación energética de una reacción química llamada combustión.",
+      "Una mezcla de oxígeno y agua a alta temperatura.",
+      "Un proceso exclusivamente físico de calentamiento del aire.",
+      "Un fenómeno eléctrico sin reacción química."
+    ],
+    "answer": 0
   },
   {
-    "question": "¿Qué se necesita para que haya fuego?",
-    "options": ["Agua", "Combustible", "Frío", "Hielo"],
-    "correct": "Combustible"
+    "question": "¿Cuáles son los cuatro elementos del tetraedro del fuego?",
+    "options": [
+      "Calor, combustible, comburente (oxígeno) y reacción química en cadena.",
+      "Calor, agua, humo y chispa.",
+      "Combustible, viento, electricidad y llama.",
+      "Oxígeno, nitrógeno, hidrógeno y calor."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "¿Qué agente se utiliza en la mayoría de los extintores portátiles?",
+    "options": [
+      "Agua a presión.",
+      "Polvo químico seco.",
+      "Aire comprimido.",
+      "Gas natural."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "¿Cuál es la principal función de un extintor?",
+    "options": [
+      "Evitar la evacuación.",
+      "Sofocar el fuego en su etapa inicial.",
+      "Producir oxígeno.",
+      "Reemplazar el sistema de rociadores."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "¿Qué significa 'comburente'?",
+    "options": [
+      "El material que arde.",
+      "El gas que alimenta la combustión (oxígeno).",
+      "La chispa que enciende el fuego.",
+      "El líquido inflamable."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "¿Qué medida de prevención es la más importante en un edificio?",
+    "options": [
+      "Disponer de señalización y salidas de emergencia.",
+      "Tener paredes pintadas de rojo.",
+      "Contar con aire acondicionado.",
+      "Prohibir el uso de electricidad."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "¿Qué equipo se utiliza para detectar humo en ambientes cerrados?",
+    "options": [
+      "Extintor.",
+      "Detector de humo.",
+      "Manguera.",
+      "Alarma manual."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "¿Qué debe hacerse en caso de evacuación?",
+    "options": [
+      "Usar ascensores para salir rápido.",
+      "Seguir la señalización hacia las salidas de emergencia.",
+      "Correr sin control.",
+      "Esperar a que el fuego se apague solo."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "¿Qué tipo de fuego apaga mejor un extintor de CO2?",
+    "options": [
+      "Fuegos clase A (sólidos como madera o papel).",
+      "Fuegos clase B (líquidos inflamables).",
+      "Fuegos clase C (eléctricos).",
+      "Todas las anteriores."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "¿Cuál es el primer paso al usar un extintor?",
+    "options": [
+      "Apuntar directamente al humo.",
+      "Quitar el seguro o anilla.",
+      "Llamar por teléfono.",
+      "Golpear el extintor contra el suelo."
+    ],
+    "answer": 1
   }
 ]

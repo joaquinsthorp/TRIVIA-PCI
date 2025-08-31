@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: trivia-pci
+    name: trivia-pci-qr
     env: node
     plan: free
     buildCommand: "npm install"
