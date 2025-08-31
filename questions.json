@@ -1,0 +1,22 @@
+[
+  {
+    "question": "¿Qué es el fuego?",
+    "options": [
+      "Reacción química",
+      "Elemento",
+      "Gas",
+      "Agua"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "¿Qué equipo se usa para apagar incendios?",
+    "options": [
+      "Extintor",
+      "Manguera",
+      "Arena",
+      "Todas las anteriores"
+    ],
+    "answer": 3
+  }
+]
