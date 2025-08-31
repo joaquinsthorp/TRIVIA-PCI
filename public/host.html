@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Host - Trivia PCI</title>
+  <meta charset="UTF-8" />
+  <title>Panel del Anfitrión</title>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <h2>Panel del Anfitrión</h2>
-  <div id="game"></div>
-  <script src="/socket.io/socket.io.js"></script>
+  <h1>Panel del Anfitrión</h1>
+  <button id="startBtn">Iniciar Juego</button>
+  <button id="nextBtn">Siguiente Pregunta</button>
+  <h2>Jugadores conectados</h2>
+  <ul id="players"></ul>
+
   <script>
     const socket = io();
-    document.getElementById("game").innerHTML = "Aquí va la lógica del host...";
+
+    document.getElementById("startBtn").onclick = () => socket.emit("startGame");
+    document.getElementById("nextBtn").onclick = () => socket.emit("nextQuestion");
+
+    socket.on("playerList", (players) => {
+      const list = document.getElementById("players");
+      list.innerHTML = "";
+      players.forEach(p => {
+        list.innerHTML += `<li>${p.name} - ${p.score} pts</li>`;
+      });
+    });
+
+    socket.on("newQuestion", (q) => alert("Nueva pregunta: " + q.question));
+    socket.on("gameOver", (scores) => alert("Juego terminado. " + JSON.stringify(scores)));
   </script>
 </body>
 </html>

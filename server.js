@@ -1,23 +1,61 @@
 const express = require("express");
 const http = require("http");
+const { Server } = require("socket.io");
 const path = require("path");
-const socketIo = require("socket.io");
+const fs = require("fs");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new Server(server);
 
+const PORT = process.env.PORT || 10000;
+
+// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Cargar preguntas
+let questions = JSON.parse(fs.readFileSync("questions.json", "utf8"));
+
+let players = {};
+let currentQuestion = 0;
+
+io.on("connection", (socket) => {
+  console.log("Nuevo cliente conectado:", socket.id);
+
+  socket.on("joinGame", (name) => {
+    players[socket.id] = { name, score: 0 };
+    console.log(`${name} se unió al juego.`);
+    io.emit("playerList", Object.values(players));
+  });
+
+  socket.on("startGame", () => {
+    currentQuestion = 0;
+    io.emit("newQuestion", questions[currentQuestion]);
+  });
+
+  socket.on("answer", (answer) => {
+    let player = players[socket.id];
+    if (!player) return;
+    let correct = questions[currentQuestion].correct === answer;
+    if (correct) player.score += 10;
+    io.emit("playerList", Object.values(players));
+  });
+
+  socket.on("nextQuestion", () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      io.emit("newQuestion", questions[currentQuestion]);
+    } else {
+      io.emit("gameOver", Object.values(players));
+    }
+  });
+
+  socket.on("disconnect", () => {
+    delete players[socket.id];
+    io.emit("playerList", Object.values(players));
+  });
 });
 
-app.get("/api/questions", (req, res) => {
-  res.json(require("./questions.json"));
-});
-
-const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Trivia PCI up on http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

@@ -1,22 +1,12 @@
 [
   {
-    "question": "¿Qué es el fuego?",
-    "options": [
-      "Reacción química",
-      "Elemento",
-      "Gas",
-      "Agua"
-    ],
-    "answer": 0
+    "question": "¿Cuál es el color del fuego?",
+    "options": ["Rojo", "Azul", "Verde", "Negro"],
+    "correct": "Rojo"
   },
   {
-    "question": "¿Qué equipo se usa para apagar incendios?",
-    "options": [
-      "Extintor",
-      "Manguera",
-      "Arena",
-      "Todas las anteriores"
-    ],
-    "answer": 3
+    "question": "¿Qué se necesita para que haya fuego?",
+    "options": ["Agua", "Combustible", "Frío", "Hielo"],
+    "correct": "Combustible"
   }
 ]

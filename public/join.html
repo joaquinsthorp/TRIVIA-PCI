@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Unirse - Trivia PCI</title>
+  <meta charset="UTF-8" />
+  <title>Jugador</title>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <h2>Unirse a la Trivia</h2>
-  <p>Ingrese código de sala aquí...</p>
-  <script src="/socket.io/socket.io.js"></script>
+  <h1>Pantalla del Jugador</h1>
+  <input id="name" placeholder="Tu nombre" />
+  <button id="joinBtn">Unirse</button>
+  <div id="question"></div>
+  <div id="answers"></div>
+
   <script>
     const socket = io();
+
+    document.getElementById("joinBtn").onclick = () => {
+      const name = document.getElementById("name").value;
+      socket.emit("joinGame", name);
+    };
+
+    socket.on("newQuestion", (q) => {
+      document.getElementById("question").innerText = q.question;
+      const answersDiv = document.getElementById("answers");
+      answersDiv.innerHTML = "";
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => socket.emit("answer", opt);
+        answersDiv.appendChild(btn);
+      });
+    });
+
+    socket.on("gameOver", (scores) => {
+      document.body.innerHTML = "<h1>Juego terminado</h1>";
+      scores.forEach(p => {
+        document.body.innerHTML += `<p>${p.name}: ${p.score} pts</p>`;
+      });
+    });
   </script>
 </body>
 </html>
